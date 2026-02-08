@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         IMAGE_NAME = "krishnav7090/myapp"
-        IMAGE_TAG = "v1"
+        IMAGE_TAG  = "v1"
         DOCKERHUB_CREDS = "Docker"
     }
 
@@ -24,11 +24,11 @@ pipeline {
         stage("Docker Hub Login") {
             steps {
                 withCredentials([usernamePassword(
-                    credentialsId: Docker,
+                    credentialsId: DOCKERHUB_CREDS,
                     usernameVariable: 'DOCKER_USER',
                     passwordVariable: 'DOCKER_PASS'
                 )]) {
-                    sh "echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin"
+                    sh 'echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin'
                 }
             }
         }
@@ -42,10 +42,10 @@ pipeline {
 
     post {
         success {
-            echo "Image successfully pushed to Docker Hub"
+            echo "✅ Image successfully pushed to Docker Hub"
         }
         failure {
-            echo "Pipeline failed"
+            echo "❌ Pipeline failed"
         }
     }
 }
