@@ -2,9 +2,9 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = "krishnav7090/myapp"
+        IMAGE_NAME = "dhanu8688/myapp"
         IMAGE_TAG  = "v1"
-        DOCKERHUB_CREDS = "Docker"
+        DOCKERHUB_CREDS = "docker"
     }
 
     stages {
